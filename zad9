@@ -1,0 +1,319 @@
+public record BankAccount(int accountNumber, int balance) {
+    public BankAccount(int accountNumber) {
+
+        this(accountNumber, 0);
+    }
+}
+
+public record BookDT0(String title, String author, double price, int yearOfPublication) {
+}
+
+
+public record Car(String brand, String model, double fuelConsumptionPer100km) {
+    public double fuelCost(double fuelPrice, double distance) {
+        return (distance / 100) * fuelConsumptionPer100km * fuelPrice;
+    }
+}
+
+
+import java.util.Objects;
+
+public class Computer {
+    String brand;
+    String model;
+    Processor processor;
+
+    public Computer(String brand, String model, Processor processor) {
+        this.brand = brand;
+        this.model = model;
+        this.processor = processor;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public Processor getProcessor() {
+        return processor;
+    }
+
+    public void setProcessor(Processor processor) {
+        this.processor = processor;
+    }
+
+    @Override
+    public String toString() {
+        return "Computer{" +
+                "brand='" + brand + '\'' +
+                ", model='" + model + '\'' +
+                ", processor=" + processor +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Computer computer = (Computer) o;
+        return Objects.equals(brand, computer.brand) && Objects.equals(model, computer.model) && Objects.equals(processor, computer.processor);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(brand, model, processor);
+    }
+
+}
+
+
+import java.util.ArrayList;
+import java.util.Objects;
+
+public class MusicAlbum {
+    public String title;
+    public String artist;
+    public ArrayList<Double> ratings;
+
+    public MusicAlbum(String title, String artist, ArrayList<Double> ratings) {
+        this.title = title;
+        this.artist = artist;
+        this.ratings = ratings;
+    }
+
+    public void addRating(double rating) {
+        ratings.add(rating);
+    }
+
+    public void removeRating(double rating) {
+        for (int i = 0; i < ratings.size(); i++) {
+            if (ratings.get(i) == rating) {
+                ratings.remove(i);
+            }
+        }
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getArtist() {
+        return artist;
+    }
+
+    public ArrayList<Double> getRatings() {
+        return ratings;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setArtist(String artist) {
+        this.artist = artist;
+    }
+
+    public void setRatings(ArrayList<Double> ratings) {
+        this.ratings = ratings;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MusicAlbum that = (MusicAlbum) o;
+        return Objects.equals(title, that.title) && Objects.equals(artist, that.artist) && Objects.equals(ratings, that.ratings);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, artist, ratings);
+    }
+
+    @Override
+    public String toString() {
+        return "MusicAlbum{" +
+                "title='" + title + '\'' +
+                ", artist='" + artist + '\'' +
+                ", ratings=" + ratings +
+                '}';
+    }
+}
+
+import java.util.ArrayList;
+import java.util.Objects;
+
+public class RockAlbum extends MusicAlbum {
+    String rockGenre;
+
+    public RockAlbum(String title, String artist, ArrayList<Double> ratings, String rockGenre) {
+        super(title, artist, ratings);
+        this.rockGenre = rockGenre;
+    }
+
+    public String getRockGenre() {
+        return rockGenre;
+    }
+
+    public void setRockGenre(String rockGenre) {
+        this.rockGenre = rockGenre;
+    }
+
+    @Override
+    public String toString() {
+        return "RockAlbum{" +
+                "rockGenre='" + rockGenre + '\'' +
+                ", title='" + title + '\'' +
+                ", artist='" + artist + '\'' +
+                ", ratings=" + ratings +
+                '}';
+    }
+}
+
+import java.util.Objects;
+
+public class Processor {
+    double frequency;
+    int cores;
+    String manufacturer;
+
+    public Processor(double frequency, int cores, String manufacturer) {
+        this.frequency = frequency;
+        this.cores = cores;
+        this.manufacturer = manufacturer;
+    }
+
+    public double getFrequency() {
+        return frequency;
+    }
+
+    public void setFrequency(double frequency) {
+        this.frequency = frequency;
+    }
+
+    public int getCores() {
+        return cores;
+    }
+
+    public void setCores(int cores) {
+        this.cores = cores;
+    }
+
+    public String getManufacturer() {
+        return manufacturer;
+    }
+
+    public void setManufacturer(String manufacturer) {
+        this.manufacturer = manufacturer;
+    }
+
+    @Override
+    public String toString() {
+        return "Processor{" +
+                "frequency=" + frequency +
+                ", cores=" + cores +
+                ", manufacturer='" + manufacturer + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Processor processor = (Processor) o;
+        return Double.compare(frequency, processor.frequency) == 0 && cores == processor.cores && Objects.equals(manufacturer, processor.manufacturer);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(frequency, cores, manufacturer);
+    }
+}
+public record Person(String firstName, String lastName, int age, Address address) {
+    public Person(String firstName, String lastName, int age, Address address) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+
+        if(age < 0)
+            this.age = 0;
+        else
+            this.age = age;
+    }
+}
+import java.util.ArrayList;
+
+public class Main {
+
+    ///HOMEWORK!!! zbiór zadań d.19 z. 5 i 11
+
+    public static void main(String[] args) {
+        BookDT0 book1 = new BookDT0("Alice in wonderland", "Lewis Carroll",
+                19.99, 1865);
+        BookDT0 book2 = new BookDT0("Blood of Elves", "Andrzej Sapkowski",
+                29.99, 1994);
+        BookDT0 book3 = new BookDT0("A Game of Thrones", "George R. R. Martin",
+                24.99, 1996);
+        System.out.println(book1);
+
+        Address add1 = new Address("Witosa", 5, "18-403", "Olsztyn");
+        Person per1 = new Person("Mykel", "Mykelski", -21, add1);
+
+        System.out.println(per1);
+        System.out.println("");
+
+        Car c1 = new Car("Subaru", "WRX TR", 5);
+        System.out.println(c1);
+        System.out.println(c1.fuelCost(7.5, 200));
+        System.out.println("");
+
+        BankAccount ba1 = new BankAccount(123456789, 200000);
+        System.out.println(ba1);
+        System.out.println("");
+
+        ArrayList<Double> rat1 = new ArrayList<Double>();
+        rat1.add(9.5);
+        rat1.add(8.0);
+        rat1.add(8.5);
+        rat1.add(9.0);
+        rat1.add(10.0);
+
+        MusicAlbum alb1 = new MusicAlbum("Attero Dominatus & Primo Victoria Sampler", "Sabato", rat1);
+        MusicAlbum alb2 = new MusicAlbum("Attero Dominatus & Primo Victoria Sampler", "Sabato", rat1);
+
+        System.out.println(alb1.equals(alb2));
+        System.out.println(alb1);
+
+        alb1.addRating(7.0);
+        alb1.setArtist("Sabaton");
+        System.out.println(alb1);
+
+        System.out.println(alb1.getArtist());
+        System.out.println(alb1.hashCode());
+        System.out.println("");
+
+        RockAlbum ralb1 = new RockAlbum("Highway to Hell", "AC/D", rat1, "heavy metal");
+        System.out.println(ralb1.equals(alb2));
+        System.out.println(ralb1);
+
+        ralb1.addRating(5.0);
+        ralb1.removeRating(7.0);
+        ralb1.setRockGenre("hard rock");
+        System.out.println(ralb1);
+
+        System.out.println(ralb1.getArtist());
+        System.out.println(ralb1.hashCode());
+    }
+}
+

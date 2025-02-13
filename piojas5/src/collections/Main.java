@@ -14,6 +14,8 @@ public class Main {
         }
         return true;
     }
+    //iterator bo nie dziala zwykle litoerowanie
+    
     public static void main(String[] args) {
 
     }
